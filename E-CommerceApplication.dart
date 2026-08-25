@@ -305,7 +305,7 @@ class Wishlist {
       return;
     }
 
-    stdout.writeln("\n========== MY WISHLIST ==========\n");
+    stdout.writeln("\t========== MY WISHLIST ==========\n");
 
     for (var product in products) {
       product.displayProduct();
@@ -1095,7 +1095,7 @@ class ECommerce {
 
     bool found = false;
 
-    stdout.writeln("\n========== MY ORDERS ==========\n");
+    stdout.writeln("\t========== MY ORDERS ==========\n");
 
     for (var order in orders) {
       if (order.customer.username.toLowerCase() ==
@@ -1223,6 +1223,70 @@ class ECommerce {
     saveWishlist();
   }
 
+  void trackOrder() {
+    if (currentCustomer == null) {
+      stdout.writeln("Please Login First!");
+      return;
+    }
+    displayCustomerOrders();
+    stdout.write("Enter Order ID to Track: ");
+
+    int? id = int.tryParse(stdin.readLineSync().toString());
+
+    if (id == null) {
+      stdout.writeln("Invalid Order ID!");
+      return;
+    }
+
+    for (var order in orders) {
+      if (order.orderId == id &&
+          order.customer.username.toLowerCase() ==
+              currentCustomer!.username.toLowerCase()) {
+        stdout.writeln("\t========== ORDER TRACKING ==========\n");
+
+        stdout.writeln("Order ID       : ${order.orderId}");
+        stdout.writeln("Order Date     : ${order.orderDateTime}");
+        stdout.writeln("Order Status   : ${order.status}");
+        stdout.writeln("Customer Name  : ${order.customer.name}");
+        stdout.writeln("Total Amount   : ${order.calculateTotal()}");
+
+        stdout.writeln("\t---------- ORDER PROGRESS ----------");
+
+        if (order.status.toLowerCase() == "pending") {
+          stdout.writeln("✓ Order Placed");
+          stdout.writeln("→ Pending");
+          stdout.writeln("○ Confirmed");
+          stdout.writeln("○ Shipped");
+          stdout.writeln("○ Delivered");
+        } else if (order.status.toLowerCase() == "confirmed") {
+          stdout.writeln("✓ Order Placed");
+          stdout.writeln("✓ Confirmed");
+          stdout.writeln("→ Shipped");
+          stdout.writeln("○ Delivered");
+        } else if (order.status.toLowerCase() == "shipped") {
+          stdout.writeln("✓ Order Placed");
+          stdout.writeln("✓ Confirmed");
+          stdout.writeln("✓ Shipped");
+          stdout.writeln("→ Delivered");
+        } else if (order.status.toLowerCase() == "delivered") {
+          stdout.writeln("✓ Order Placed");
+          stdout.writeln("✓ Confirmed");
+          stdout.writeln("✓ Shipped");
+          stdout.writeln("✓ Delivered");
+        } else if (order.status.toLowerCase() == "cancelled") {
+          stdout.writeln("✓ Order Placed");
+          stdout.writeln("✗ Order Cancelled");
+        }
+
+        stdout.writeln("\n====================================\n");
+
+        return;
+      }
+    }
+
+    stdout.writeln("Order Not Found!");
+  }
+
   void adminLogin() {
     stdout.writeln("\t========== ADMIN LOGIN ==========\n");
 
@@ -1346,7 +1410,8 @@ class ECommerce {
       stdout.writeln("10. Remove from Wishlist");
       stdout.writeln("11. View My Orders");
       stdout.writeln("12. Cancel Order");
-      stdout.writeln("13. Logout");
+      stdout.writeln("13. Track Order");
+      stdout.writeln("14. Logout.");
 
       stdout.write("\nEnter Your Choice: ");
 
@@ -1436,6 +1501,9 @@ class ECommerce {
           break;
 
         case "13":
+          trackOrder();
+          break;
+        case "14":
           if (currentCustomer != null) {
             saveCart();
 
@@ -1447,7 +1515,6 @@ class ECommerce {
           wishlist.products.clear();
 
           return;
-
         default:
           stdout.writeln("Invalid Choice!");
       }
