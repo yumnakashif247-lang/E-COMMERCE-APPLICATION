@@ -366,14 +366,28 @@ class Order {
   }
 
   bool cancelOrder() {
-    if (status.toLowerCase() == "pending" ||
-        status.toLowerCase() == "confirmed") {
+    String currentStatus = status.toLowerCase();
+
+    if (currentStatus == "pending" || currentStatus == "confirmed") {
       status = "Cancelled";
       stdout.writeln("Order Cancelled Successfully!");
       return true;
     }
 
-    stdout.writeln("Order cannot Cancel!");
+    stdout.writeln("Current Order Status: $status");
+
+    if (currentStatus == "shipped") {
+      stdout.writeln(
+        "Order cannot be cancelled because it has already been shipped.",
+      );
+    } else if (currentStatus == "delivered") {
+      stdout.writeln(
+        "Order cannot be cancelled because it has already been delivered.",
+      );
+    } else if (currentStatus == "cancelled") {
+      stdout.writeln("Order has already been cancelled.");
+    }
+
     return false;
   }
 
