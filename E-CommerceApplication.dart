@@ -1115,7 +1115,8 @@ class ECommerce {
       stdout.writeln("Please Login First!");
       return;
     }
-
+    stdout.writeln("\t------- CANCEL ORDER -------\n");
+    displayCustomerOrders();
     stdout.write("Enter Order ID to Cancel: ");
 
     int? id = int.tryParse(stdin.readLineSync().toString());
