@@ -1,108 +1,188 @@
-# E-Commerce Application
+# 🛒 E-Commerce Application
 
-A console-based **E-Commerce Application built with Dart** as part of my journey toward learning **Flutter**. This project focuses on applying Dart concepts to build a complete application with real-world functionality and data persistence.
+A **console-based E-Commerce Application built with Dart**. It provides an interactive system for customers to browse products, manage their cart and wishlist, place orders, track order status, and cancel eligible orders. The application also includes an **Admin Panel** for managing products, stock, prices, and orders.
 
-## Features
+## ✨ Features
 
-### Admin
+* 📝 Customer Registration & Login
+* 🛍️ View All Products
+* 📂 Browse Products by Category
+* 🛒 Shopping Cart Management
+* ➕ Add Products to Cart
+* 🔄 Update Cart Quantity
+* 🗑️ Remove Products from Cart
+* ❤️ Wishlist Management
+* 📦 Order Placement
+* 🔢 Random 6-Digit Order ID
+* 📍 Order Tracking
+* ❌ Order Cancellation
+* 🔄 Order Status Updates
+* 📉 Automatic Stock Management
+* 💾 JSON File Storage
 
-* Secure admin login
-* Add new products
-* View all products
-* Update product prices
-* Increase product stock
-* View all customer orders
-* Update order status
+## 👤 Customer Features
 
-### Customer
-
-* Customer registration
-* Customer login and logout
+* Register a new account
+* Login and logout
 * View all available products
 * View products by category
-* Add products to cart
-* View shopping cart
-* Update cart quantity
-* Remove products from cart
-* Wishlist management
-* Place orders
-* View order history
-* Track current order status
-* Cancel eligible orders
+* Add products to the cart
+* Update or remove cart items
+* Add products to the wishlist
+* View and remove wishlist products
+* Place an order
+* View personal orders
+* Track orders using the Order ID
+* Cancel orders with `Pending` or `Confirmed` status
 
+## 👨‍💼 Admin Features
 
+* 🔐 Admin Login
+* ➕ Add New Products
+* 👀 View All Products
+* 💰 Update Product Prices
+* 📦 Increase Product Stock
+* 📋 View All Customer Orders
+* 🔄 Update Order Status
 
-The application uses **JSON files** for storing data.
+## 📦 Order Status Flow
 
-Data includes:
-
-* Products
-* Customers
-* Orders
-* Carts
-* Wishlists
-
-This allows application data to persist between program runs.
-
-## Dart Concepts Used
-
-* Classes and Objects
-* Constructors
-* Methods and Getters
-* Lists and Maps
-* Loops and Conditional Statements
-* Null Safety
-* User Input Handling
-* Async/Await
-* Futures
-* File Handling
-* JSON Encoding and Decoding
-* DateTime
-* Random Number Generation
-* Data Validation
-* CRUD Operations
-
-## Project Structure
-
-E-COMMERCE-APPLICATION/
-│
-├── main.dart
-│
-└── JSON FILES/
-    ├── products.json
-    ├── customers.json
-    ├── orders.json
-    ├── carts.json
-    └── wishlists.json
-
-## How to Run
-
-1. Clone the repository.
-2. Open the project folder in VS Code or another Dart-supported IDE.
-3. Make sure the Dart SDK is installed.
-4. Run the following command:
-
-```bash
-dart run main.dart
+```text id="ocv3xp"
+Pending → Confirmed → Shipped → Delivered
 ```
 
-## Learning Journey
+Orders can only move **forward** through the status flow.
 
-This project was built while learning Dart as preparation for Flutter development. Instead of practicing individual concepts separately, I combined them into a complete application to understand how different Dart concepts work together in a real-world project.
+❌ Backward status changes are not allowed.
 
-This project helped me gain practical experience with application flow, data management, file handling, JSON storage, validation, and user interaction through the console.
+Customers can cancel orders only when the status is:
 
-I am continuing my journey with **Flutter** and plan to use these Dart fundamentals to build interactive and user-friendly applications.
+```text id="3j7gvg"
+Pending or Confirmed
+```
 
-## Author
+Once an order is **Shipped** or **Delivered**, it cannot be cancelled.
+
+## 📍 Order Tracking
+
+Customers can track their orders using their **Order ID** and view:
+
+* 🆔 Order ID
+* 📅 Order Date & Time
+* 📦 Current Order Status
+* 👤 Customer Name
+* 💰 Total Amount
+* 📊 Order Progress
+
+Example:
+
+```text id="9j0wpd"
+✓ Order Placed
+✓ Confirmed
+→ Shipped
+○ Delivered
+```
+
+## 🛠️ Technologies Used
+
+* Dart
+* Object-Oriented Programming (OOP)
+* Dart IO
+* JSON
+* File Handling
+* Async/Await
+* Null Safety
+
+## 🧩 Main Classes
+
+* **Product** — Manages product information, price, and stock.
+* **Customer** — Handles registration, login, and logout.
+* **OrderItem** — Represents products and quantities inside an order.
+* **Cart** — Manages cart items and total price.
+* **Wishlist** — Manages saved products.
+* **Order** — Handles order details, status, cancellation, and total calculation.
+* **JsonDatabase** — Handles loading and saving data using JSON files.
+* **ECommerce** — Controls the main application functionality and menus.
+
+## 💾 Data Storage
+
+The application uses JSON files for persistent data storage:
+
+```text id="g5q0dp"
+JSON FILES/
+│
+├── customers.json
+├── products.json
+├── orders.json
+├── carts.json
+└── wishlists.json
+```
+
+## 📂 Project Structure
+
+```text id="h5nfzm"
+E-Commerce-Application/
+│
+├── bin/
+│   └── main.dart
+│
+├── JSON FILES/
+│   ├── customers.json
+│   ├── products.json
+│   ├── orders.json
+│   ├── carts.json
+│   └── wishlists.json
+│
+└── README.md
+```
+
+## 🚀 How to Run
+
+1. Clone the repository:
+
+```bash id="ejd44v"
+git clone <your-repository-url>
+```
+
+2. Open the project folder:
+
+```bash id="u0qwb4"
+cd E-Commerce-Application
+```
+
+3. Run the application:
+
+```bash id="bcl9s6"
+dart run
+```
+
+## 🎯 Concepts Practiced
+
+* Classes & Objects
+* Constructors
+* Encapsulation
+* Lists
+* Loops
+* Conditional Statements
+* Switch Statements
+* Null Safety
+* Static Methods
+* Getters
+* Async/Await
+* Random Number Generation
+* DateTime
+* File Handling
+* JSON Encoding & Decoding
+* Input Validation
+
+## 👩‍💻 Author
 
 **Yumna Kashif**
 
 GitHub: https://github.com/yumnakashif247-lang
 
-## Repository
+Repository
 
-🔗 (https://github.com/yumnakashif247-lang/E-COMMERCE-APPLICATION)
+🔗 https://github.com/yumnakashif247-lang/E-COMMERCE-APPLICATION
 
-
-⭐ If you found this project interesting, feel free to star the repository!
+⭐ If you like this project, don't forget to **star the repository**!
